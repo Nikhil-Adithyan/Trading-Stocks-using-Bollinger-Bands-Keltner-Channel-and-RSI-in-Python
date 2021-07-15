@@ -13,7 +13,7 @@ plt.rcParams['figure.figsize'] = (20,10)
 # EXTRACTING STOCK DATA
 
 def get_historical_data(symbol, start_date):
-    api_key = 'ace6a59ff46446659af4e691fab88e22'
+    api_key = 'YOUR API KEY'
     api_url = f'https://api.twelvedata.com/time_series?symbol={symbol}&interval=1day&outputsize=5000&apikey={api_key}'
     raw_df = requests.get(api_url).json()
     df = pd.DataFrame(raw_df['values']).iloc[::-1].set_index('datetime').astype(float)
@@ -181,7 +181,7 @@ ax1.set_title('AAPL STOCK PRICE')
 ax2.plot(aapl['rsi_14'], color = 'purple', linewidth = 2)
 ax2.axhline(30, color = 'grey', linestyle = '--', linewidth = 1.5)
 ax2.axhline(70, color = 'grey', linestyle = '--', linewidth = 1.5)
-ax2.set_title('AAPL rsi 10')
+ax2.set_title('AAPL RSI 10')
 plt.show()
 
 # POSITION
@@ -214,7 +214,6 @@ frames = [close_price, kc_upper, kc_lower, upper_bb, lower_bb, rsi, bb_kc_rsi_si
 strategy = pd.concat(frames, join = 'inner', axis = 1)
 
 strategy.tail()
-strategy[strategy.index <= '2013-08-02'].tail()
 
 # BACKTESTING
 
